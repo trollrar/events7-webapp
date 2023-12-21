@@ -1,17 +1,25 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
-import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import {RouterModule, Routes} from "@angular/router";
+import { EventComponent } from './main/event/event.component';
+
+const routes: Routes = [{
+  path: '',
+  children: [{path: '', loadChildren: () => {
+      return import('./main/main.module').then(m => m.MainModule);
+    }}],
+}];
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    EventComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
+    RouterModule.forRoot(routes),
     NgbModule
   ],
   providers: [],
