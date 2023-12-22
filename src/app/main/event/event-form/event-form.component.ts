@@ -42,7 +42,6 @@ export class EventFormComponent {
   }
 
   onSubmit() {
-    console.log('form');
     let event: Event = this.form.value as Event;
     event.priority = Number(event.priority);
     this.submitFrom.emit(event);

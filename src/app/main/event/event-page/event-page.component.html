@@ -53,7 +53,7 @@
   <div class="card-body">
     <loading *ngIf="loading"></loading>
     <ng-container *ngIf="!loading">
-      <button class="btn btn-primary mb-2" [routerLink]="'/create'">Create new</button>
+      <button class="btn btn-primary mb-2" [routerLink]="'/create'">Create Event</button>
       <ng-container *ngFor="let event of events!.data">
         <div class="border-bottom border-1 my-1"></div>
         <div class="px-1">

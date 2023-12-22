@@ -3,7 +3,6 @@ import {EventSummary} from "./event-summary.interface";
 import {EventService} from "../event.service";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {DeleteEventModalComponent} from "../delete-event-modal/delete-event-modal.component";
-import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-event-summary',

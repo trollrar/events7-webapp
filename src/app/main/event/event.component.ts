@@ -4,6 +4,7 @@ import {EventService} from "./event.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {DeleteEventModalComponent} from "./delete-event-modal/delete-event-modal.component";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
+import {Title} from "@angular/platform-browser";
 
 @Component({
   selector: 'app-event',
@@ -15,7 +16,7 @@ export class EventComponent implements OnInit{
   public notFound = false
   public deleteError?: string;
 
-  constructor(protected eventService: EventService, private route: ActivatedRoute, private modalService: NgbModal, private router: Router) {}
+  constructor(protected eventService: EventService, private route: ActivatedRoute, private modalService: NgbModal, private router: Router, private titleService: Title) {}
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((params) => {
@@ -30,8 +31,16 @@ export class EventComponent implements OnInit{
   }
 
   private loadEvent(id: number): void {
-    this.eventService.getOne(id).subscribe(event => {
-        this.event = event;
+    this.eventService.getOne(id).subscribe({
+        next: event => {
+          if (!event) {
+            this.showNotFound();
+          }
+          this.event = event;
+          this.titleService.setTitle(`Events7 - ${event.name}#${event.id}`)
+        }, error: () => {
+          this.showNotFound();
+        }
       }
     );
   }

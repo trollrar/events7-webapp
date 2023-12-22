@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 import {EventService} from "../event.service";
 import {Router} from "@angular/router";
 import {Event} from "../event.interface";
+import {Title} from "@angular/platform-browser";
 
 @Component({
   selector: 'app-event-create',
@@ -15,7 +16,10 @@ export class EventCreateComponent {
   constructor(
     private eventService: EventService,
     private router: Router,
-  ) {}
+    private titleService: Title
+  ) {
+    this.titleService.setTitle(`Events7 - Create Event`)
+  }
 
   onSubmit(event: Event) {
     this.loading = true;
@@ -25,7 +29,6 @@ export class EventCreateComponent {
           this.router.navigateByUrl('/' + event.id);
         },
         error: (error) => {
-          console.log(error)
           if (error.status === 400) {
             this.error = error.error.message.join(',');
           }

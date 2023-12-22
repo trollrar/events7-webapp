@@ -7,6 +7,7 @@ import {Subscription} from "rxjs";
 import {EventQueryInterface, EventQueryPriorityCondition, EventQuerySortField} from "./query/event-query.interface";
 import {Page} from "../../../shared/interface/page.interface";
 import {FormBuilder, FormControl} from "@angular/forms";
+import {Title} from "@angular/platform-browser";
 
 @Component({
   selector: 'app-event-page',
@@ -29,9 +30,11 @@ export class EventPageComponent implements OnInit, OnDestroy {
     private fb: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
+    private titleService: Title
   ) {}
 
   public ngOnInit (): void {
+    this.titleService.setTitle(`Events7`)
     this.paramsSubscription = this.route.queryParams.subscribe((params: Params): void => {
       this.pageQuery = this.eventQueryService.toQueryInterface(params);
       this.searchForm.setValue(this.pageQuery.searchByName);
@@ -89,7 +92,6 @@ export class EventPageComponent implements OnInit, OnDestroy {
       return;
     }
 
-    console.log(type);
     this.pageQuery.filterType = type
     this.applyPageQuery();
   }

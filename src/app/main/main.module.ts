@@ -12,6 +12,7 @@ import {ReactiveFormsModule} from "@angular/forms";
 import { EventFormComponent } from './event/event-form/event-form.component';
 import { EventUpdateComponent } from './event/event-update/event-update.component';
 import { DeleteEventModalComponent } from './event/delete-event-modal/delete-event-modal.component';
+import {NotFoundComponent} from "../shared/not-found/not-found.component";
 
 
 const routes: Routes = [{
@@ -37,6 +38,11 @@ const routes: Routes = [{
       path: ':id/edit',
       pathMatch: 'full',
       component: EventUpdateComponent,
+    },
+    {
+      path: '**',
+      pathMatch: 'full',
+      component: NotFoundComponent,
     },
   ]
 }];
