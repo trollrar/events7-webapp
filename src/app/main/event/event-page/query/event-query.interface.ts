@@ -5,15 +5,15 @@ export type EventQueryPriorityCondition = 'eq' | 'gte' | 'gt' | 'lte' | 'lt';
 
 export interface EventQueryInterface {
   page?: number,
-    pageSize?: number,
-    sort?: {
-      field: EventQuerySortField,
-      ascending: boolean
-    },
-    searchByName?: string,
-    filterType?: EventType,
-    filterPriority?: {
-      value: number,
-      condition: EventQueryPriorityCondition,
-    },
+  pageSize?: number,
+  sort?: {
+    field: EventQuerySortField,
+    ascending: boolean
+  },
+  searchByName?: string,
+  filterType?: EventType,
+  filterPriority?: {
+    value: number,
+    condition: EventQueryPriorityCondition,
+  },
 }

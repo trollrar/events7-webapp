@@ -6,6 +6,7 @@ import {EventSummary, EventType} from "../event-summary/event-summary.interface"
 import {Subscription} from "rxjs";
 import {EventQueryInterface, EventQueryPriorityCondition, EventQuerySortField} from "./query/event-query.interface";
 import {Page} from "../../../shared/interface/page.interface";
+import {FormBuilder, FormControl} from "@angular/forms";
 
 @Component({
   selector: 'app-event-page',
@@ -14,14 +15,18 @@ import {Page} from "../../../shared/interface/page.interface";
 })
 export class EventPageComponent  implements OnInit, OnDestroy {
 
-  public events: Page<EventSummary> = {} as Page<EventSummary>;
+  public events?: Page<EventSummary>;
   public loading: boolean = false;
   public pageQuery: EventQueryInterface = {};
-  private paramsSubscription: Subscription | undefined;
+  private paramsSubscription?: Subscription;
+  public searchForm: FormControl = this.fb.control('');
+  public filterableEvenTypes: EventType[] = ['add', 'app', 'crosspromo', 'liveops'];
+  public sortableFields: EventQuerySortField[] = ['type', 'id', 'name', 'priority'];
 
   constructor (
     private eventService: EventService,
     private eventQueryService: EventQueryService,
+    private fb: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
   ) {}
@@ -29,6 +34,7 @@ export class EventPageComponent  implements OnInit, OnDestroy {
   public ngOnInit (): void {
     this.paramsSubscription = this.route.queryParams.subscribe((params: Params): void => {
       this.pageQuery = this.eventQueryService.toQueryInterface(params);
+      this.searchForm.setValue(this.pageQuery.searchByName);
       this.loadEvents();
     });
   }
@@ -39,12 +45,18 @@ export class EventPageComponent  implements OnInit, OnDestroy {
     }
   }
 
-  public fetchPage(page?: number, pageSize?: number) {
+  public fetchPage(page?: number) {
     if (page) {
       this.pageQuery.page = page;
     }
+    this.applyPageQuery();
+  }
+
+  public changePageSize(e: Event) {
+    const target = e.target as HTMLSelectElement;
+    const pageSize = Number(target.value);
     if (pageSize) {
-      this.pageQuery.page = pageSize;
+      this.pageQuery.pageSize = pageSize;
     }
     this.applyPageQuery();
   }
@@ -64,12 +76,20 @@ export class EventPageComponent  implements OnInit, OnDestroy {
   }
 
 
-  public searchByName(search: string) {
-    this.pageQuery.searchByName = search
+  public searchByName(event: Event) {
+    event.preventDefault()
+    this.pageQuery.searchByName = this.searchForm.value;
     this.applyPageQuery();
   }
 
   public filterByType(type: EventType) {
+    if (this.pageQuery.filterType === type) {
+      this.pageQuery.filterType = undefined;
+      this.applyPageQuery();
+      return;
+    }
+
+    console.log(type);
     this.pageQuery.filterType = type
     this.applyPageQuery();
   }

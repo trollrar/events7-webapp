@@ -5,6 +5,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {RouterModule, Routes} from "@angular/router";
 import { EventComponent } from './main/event/event.component';
 import {HttpClientModule} from "@angular/common/http";
+import {SharedModule} from "./shared/shared.module";
 
 const routes: Routes = [{
   path: '',
@@ -21,6 +22,7 @@ const routes: Routes = [{
   imports: [
     BrowserModule,
     RouterModule.forRoot(routes),
+    SharedModule,
     NgbModule,
     HttpClientModule,
   ],

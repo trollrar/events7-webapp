@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {EventQueryInterface} from "./event-query.interface";
-import {HttpParams} from "@angular/common/http";
+import {HttpParams, HttpParamsOptions} from "@angular/common/http";
 import {Params} from "@angular/router";
 
 @Injectable({
@@ -12,14 +12,11 @@ export class EventQueryService {
   }
 
   public toHttpParams(queryInterface: EventQueryInterface): HttpParams {
-    const httpParams = new HttpParams();
-    const params = this.toParams(queryInterface);
-
-    for (const key in params) {
-      httpParams.set(key, params[key])
+    const options: HttpParamsOptions = {
+      fromObject: this.toParams(queryInterface)
     }
 
-    return httpParams;
+    return  new HttpParams(options);
   }
 
   public toParams(queryInterface: EventQueryInterface): Params {
@@ -42,7 +39,7 @@ export class EventQueryService {
     }
 
     if (queryInterface.filterType) {
-      params['filter.name'] = `$eq:${queryInterface.searchByName}`;
+      params['filter.type'] = `$eq:${queryInterface.filterType}`;
     }
 
     if (queryInterface.filterPriority) {
@@ -56,7 +53,7 @@ export class EventQueryService {
     const eventQuery: EventQueryInterface = {};
 
     let page = Number(params['page']);
-    if (page > 1) {
+    if (page > 0) {
       eventQuery.page = page;
     }
 
