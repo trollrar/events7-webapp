@@ -11,6 +11,7 @@ import {NgbPagination} from "@ng-bootstrap/ng-bootstrap";
 import {ReactiveFormsModule} from "@angular/forms";
 import { EventFormComponent } from './event/event-form/event-form.component';
 import { EventUpdateComponent } from './event/event-update/event-update.component';
+import { DeleteEventModalComponent } from './event/delete-event-modal/delete-event-modal.component';
 
 
 const routes: Routes = [{
@@ -47,7 +48,8 @@ const routes: Routes = [{
     EventPageComponent,
     EventCreateComponent,
     EventFormComponent,
-    EventUpdateComponent
+    EventUpdateComponent,
+    DeleteEventModalComponent
   ],
   imports: [
     CommonModule,

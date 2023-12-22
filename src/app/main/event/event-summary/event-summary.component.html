@@ -11,6 +11,9 @@
   <div class="btn-group">
     <button [routerLink]="'/' + event.id" class="btn btn-sm btn-outline-secondary">Details</button>
     <button [routerLink]="'/' + event.id + '/edit'" [disabled]="event.type === 'ads' && !(eventService.canManageAdsEvents | async)" class="btn btn-sm btn-outline-secondary">Edit</button>
-    <button [disabled]="event.type === 'ads' && !(eventService.canManageAdsEvents | async)" class="btn btn-sm btn-outline-danger">Delete</button>
+    <button (click)="deleteEvent()" [disabled]="event.type === 'ads' && !(eventService.canManageAdsEvents | async)" class="btn btn-sm btn-outline-danger">Delete</button>
   </div>
+</div>
+<div *ngIf="deleteError" class="d-flex justify-content-end">
+  <small class="text-danger">Delete error: {{ deleteError }}</small>
 </div>

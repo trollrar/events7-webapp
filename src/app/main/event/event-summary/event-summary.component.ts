@@ -1,6 +1,9 @@
-import {Component, Input} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {EventSummary} from "./event-summary.interface";
 import {EventService} from "../event.service";
+import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
+import {DeleteEventModalComponent} from "../delete-event-modal/delete-event-modal.component";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-event-summary',
@@ -10,6 +13,25 @@ import {EventService} from "../event.service";
 export class EventSummaryComponent {
   @Input()
   public event!: EventSummary;
+  @Output()
+  public reload = new EventEmitter<void>;
+  public deleteError?: string;
+  constructor(public eventService: EventService, private modalService: NgbModal) {}
 
-  constructor(public eventService: EventService) {}
+  deleteEvent() {
+    let ref = this.modalService.open(DeleteEventModalComponent);
+    ref.result.then(
+      () => {
+        this.eventService.deleteEvent(this.event!.id).subscribe({
+          next: () => {
+            this.reload.emit();
+          },
+          error: (error) => {
+            this.deleteError = error.error.message;
+          }
+        });
+      },
+      () => {}
+    );
+  }
 }

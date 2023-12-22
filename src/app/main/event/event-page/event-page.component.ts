@@ -107,7 +107,7 @@ export class EventPageComponent implements OnInit, OnDestroy {
     });
   }
 
-  private loadEvents (): void {
+  protected loadEvents(): void {
     this.loading = true;
     this.eventService.getAll(this.pageQuery)
       .subscribe((events: Page<EventSummary>) => {
