@@ -4,6 +4,7 @@ import {Observable} from "rxjs";
 import {Page} from "../../shared/interface/page.interface";
 import {environment} from "../../../environments/environment";
 import {EventSummary} from "./event-summary/event-summary.interface";
+import {Event} from "./event.interface";
 import {EventQueryService} from "./event-page/query/event-query.service";
 import {EventQueryInterface} from "./event-page/query/event-query.interface";
 

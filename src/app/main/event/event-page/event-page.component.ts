@@ -13,7 +13,7 @@ import {FormBuilder, FormControl} from "@angular/forms";
   templateUrl: './event-page.component.html',
   styleUrl: './event-page.component.scss'
 })
-export class EventPageComponent  implements OnInit, OnDestroy {
+export class EventPageComponent implements OnInit, OnDestroy {
 
   public events?: Page<EventSummary>;
   public loading: boolean = false;
