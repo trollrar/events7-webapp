@@ -4,6 +4,7 @@ import { AppComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {RouterModule, Routes} from "@angular/router";
 import { EventComponent } from './main/event/event.component';
+import {HttpClientModule} from "@angular/common/http";
 
 const routes: Routes = [{
   path: '',
@@ -20,7 +21,8 @@ const routes: Routes = [{
   imports: [
     BrowserModule,
     RouterModule.forRoot(routes),
-    NgbModule
+    NgbModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
