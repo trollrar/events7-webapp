@@ -20,7 +20,7 @@ export class EventPageComponent  implements OnInit, OnDestroy {
   public pageQuery: EventQueryInterface = {};
   private paramsSubscription?: Subscription;
   public searchForm: FormControl = this.fb.control('');
-  public filterableEvenTypes: EventType[] = ['add', 'app', 'crosspromo', 'liveops'];
+  public filterableEventTypes: EventType[] = ['ads', 'app', 'crosspromo', 'liveops'];
   public sortableFields: EventQuerySortField[] = ['type', 'id', 'name', 'priority'];
 
   constructor (

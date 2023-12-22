@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {EventService} from "./event/event.service";
 
 @Component({
   selector: 'app-main',
@@ -6,5 +7,6 @@ import { Component } from '@angular/core';
   styleUrl: './main.component.scss'
 })
 export class MainComponent {
-
+  constructor(public eventService: EventService) {
+  }
 }

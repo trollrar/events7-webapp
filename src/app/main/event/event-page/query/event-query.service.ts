@@ -78,7 +78,7 @@ export class EventQueryService {
       eventQuery.searchByName = searchByName?.split(':')[1];
     }
 
-    let filterTypeRegex = /^\$eq:(add|app|crosspromo|liveops)$/;
+    let filterTypeRegex = /^\$eq:(ads|app|crosspromo|liveops)$/;
     let filterType = params['filter.type'];
     if (filterType && filterTypeRegex.test(filterType)) {
       // @ts-ignore

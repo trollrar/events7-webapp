@@ -1,4 +1,4 @@
-export type EventType = 'add' | 'app' | 'liveops' | 'crosspromo' ;
+export type EventType = 'ads' | 'app' | 'liveops' | 'crosspromo' ;
 
 export interface EventSummary {
   id: number;

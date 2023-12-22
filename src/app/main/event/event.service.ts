@@ -12,7 +12,15 @@ import {EventQueryInterface} from "./event-page/query/event-query.interface";
 })
 export class EventService {
 
-  constructor(private http: HttpClient, private eventQueryService: EventQueryService) {}
+  constructor(private http: HttpClient, private eventQueryService: EventQueryService) {
+    this.resetCanManageAdsEvents();
+  }
+
+  public canManageAdsEvents: boolean = false;
+
+  public resetCanManageAdsEvents() {
+    this.isIpAuthorized().subscribe(isAuthorized => this.canManageAdsEvents = isAuthorized)
+  }
 
   public getAll(eventPageQuery: EventQueryInterface): Observable<Page<EventSummary>> {
     let params = this.eventQueryService.toHttpParams(eventPageQuery);
@@ -35,7 +43,7 @@ export class EventService {
     return this.http.delete<boolean>(`${environment.apiUrl}/${eventId}`);
   }
 
-  public canManageAddTypeEvents(): Observable<boolean> {
+  public isIpAuthorized(): Observable<boolean> {
     return this.http.get<boolean>(`${environment.apiUrl}/is-authorized`);
   }
 }

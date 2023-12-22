@@ -13,7 +13,7 @@
       <div class="d-flex flex-column">
         <small class="text-secondary">Filter Type</small>
         <div class="btn-group" role="group">
-          <button *ngFor="let type of filterableEvenTypes" type="button"
+          <button *ngFor="let type of filterableEventTypes" type="button"
                   [class.btn-primary]="pageQuery.filterType === type"
                   [class.btn-outline-primary]="pageQuery.filterType !== type" class="btn" (click)="filterByType(type)">
             {{type | titlecase}}
@@ -53,9 +53,13 @@
   <div class="card-body">
     <loading *ngIf="loading"></loading>
     <ng-container *ngIf="!loading">
-      <app-event-summary *ngFor="let event of events!.data"
-                         [event]="event"></app-event-summary>
-
+      <button class="btn btn-primary mb-2">Create new</button>
+      <ng-container *ngFor="let event of events!.data">
+        <div class="border-bottom border-1 my-1"></div>
+        <div class="px-1">
+        <app-event-summary [event]="event"></app-event-summary>
+        </div>
+      </ng-container>
     </ng-container>
   </div>
 </div>

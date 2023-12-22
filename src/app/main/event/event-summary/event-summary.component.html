@@ -1,10 +1,16 @@
-<div class="d-flex align-content-between">
-  <div>
-    {{event.id}}
-    {{event.name}}
-    {{event.type}}
+<div class="d-flex justify-content-between align-items-center">
+  <div class="d-flex flex-column">
+    <div>
+      {{ event.name }}<small class="text-secondary me-3">#{{ event.id }}</small>
+      <span class="badge text-bg-primary">{{ event.type | titlecase }}</span>
+    </div>
+    <div>
+    <small class="text-secondary">↑ {{ event.priority }}</small>
+    </div>
   </div>
-  <div>
-    {{event.priority}}
+  <div class="btn-group">
+    <button class="btn btn-sm btn-outline-secondary">Details</button>
+    <button [disabled]="event.type === 'ads' && !eventService.canManageAdsEvents" class="btn btn-sm btn-outline-secondary">Edit</button>
+    <button [disabled]="event.type === 'ads' && !eventService.canManageAdsEvents" class="btn btn-sm btn-outline-danger">Delete</button>
   </div>
 </div>

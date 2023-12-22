@@ -1,3 +1,5 @@
 <div class="container py-3">
+  <span *ngIf="eventService.canManageAdsEvents" class="badge text-bg-success mb-2" title="Can manage type ads events">Full access</span>
+  <span *ngIf="!eventService.canManageAdsEvents" class="badge text-bg-warning mb-2" title="Can not manage type ads events">Limited access</span>
   <router-outlet></router-outlet>
 </div>

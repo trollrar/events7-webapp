@@ -1,5 +1,6 @@
 import {Component, Input} from '@angular/core';
 import {EventSummary} from "./event-summary.interface";
+import {EventService} from "../event.service";
 
 @Component({
   selector: 'app-event-summary',
@@ -9,4 +10,6 @@ import {EventSummary} from "./event-summary.interface";
 export class EventSummaryComponent {
   @Input()
   public event!: EventSummary;
+
+  constructor(public eventService: EventService) {}
 }
