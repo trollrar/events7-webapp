@@ -1,0 +1,9 @@
+<div class="card">
+  <div class="card-header">
+    <h6 class="mb-0">Update event #{{eventId}}</h6>
+  </div>
+  <div class="card-body">
+    <loading *ngIf="!event"></loading>
+    <app-event-form *ngIf="event" (submitFrom)="onSubmit($event)" [form]="event!" [error]="error" [loading]="loading"></app-event-form>
+  </div>
+</div>

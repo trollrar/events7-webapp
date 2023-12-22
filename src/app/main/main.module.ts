@@ -9,6 +9,8 @@ import {EventComponent} from "./event/event.component";
 import {SharedModule} from "../shared/shared.module";
 import {NgbPagination} from "@ng-bootstrap/ng-bootstrap";
 import {ReactiveFormsModule} from "@angular/forms";
+import { EventFormComponent } from './event/event-form/event-form.component';
+import { EventUpdateComponent } from './event/event-update/event-update.component';
 
 
 const routes: Routes = [{
@@ -30,6 +32,11 @@ const routes: Routes = [{
       pathMatch: 'full',
       component: EventComponent,
     },
+    {
+      path: ':id/edit',
+      pathMatch: 'full',
+      component: EventUpdateComponent,
+    },
   ]
 }];
 
@@ -38,7 +45,9 @@ const routes: Routes = [{
     MainComponent,
     EventSummaryComponent,
     EventPageComponent,
-    EventCreateComponent
+    EventCreateComponent,
+    EventFormComponent,
+    EventUpdateComponent
   ],
   imports: [
     CommonModule,

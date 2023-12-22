@@ -17,10 +17,14 @@ export class EventService {
     this.resetCanManageAdsEvents();
   }
 
+  public canManageAdsEventsLast?: boolean;
   public canManageAdsEvents: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   public resetCanManageAdsEvents() {
-    this.isIpAuthorized().subscribe(isAuthorized => this.canManageAdsEvents.emit(isAuthorized))
+    this.isIpAuthorized().subscribe(isAuthorized => {
+      this.canManageAdsEventsLast = isAuthorized;
+      this.canManageAdsEvents.emit(isAuthorized);
+    })
   }
 
   public getAll(eventPageQuery: EventQueryInterface): Observable<Page<EventSummary>> {

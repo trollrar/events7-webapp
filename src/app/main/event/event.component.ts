@@ -16,13 +16,13 @@ export class EventComponent implements OnInit{
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((params) => {
-      const postId = Number(params.get('id'));
-      if (!postId) {
+      const eventId = Number(params.get('id'));
+      if (!eventId) {
         this.showNotFound();
         return;
       }
 
-      this.loadEvent(postId);
+      this.loadEvent(eventId);
     });
   }
 
