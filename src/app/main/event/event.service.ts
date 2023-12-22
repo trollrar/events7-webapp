@@ -15,7 +15,7 @@ export class EventService {
   constructor(private http: HttpClient, private eventQueryService: EventQueryService) {}
 
   public getAll(eventPageQuery: EventQueryInterface): Observable<Page<EventSummary>> {
-    const params = this.eventQueryService.toHttpParams(eventPageQuery);
+    let params = this.eventQueryService.toHttpParams(eventPageQuery);
     return this.http.get<Page<EventSummary>>(`${environment.apiUrl}`, { params });
   }
 

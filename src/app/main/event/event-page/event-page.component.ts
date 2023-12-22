@@ -53,8 +53,8 @@ export class EventPageComponent  implements OnInit, OnDestroy {
   }
 
   public changePageSize(e: Event) {
-    const target = e.target as HTMLSelectElement;
-    const pageSize = Number(target.value);
+    let target = e.target as HTMLSelectElement;
+    let pageSize = Number(target.value);
     if (pageSize) {
       this.pageQuery.pageSize = pageSize;
     }

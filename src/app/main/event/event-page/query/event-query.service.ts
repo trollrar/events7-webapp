@@ -12,7 +12,7 @@ export class EventQueryService {
   }
 
   public toHttpParams(queryInterface: EventQueryInterface): HttpParams {
-    const options: HttpParamsOptions = {
+    let options: HttpParamsOptions = {
       fromObject: this.toParams(queryInterface)
     }
 
@@ -20,7 +20,7 @@ export class EventQueryService {
   }
 
   public toParams(queryInterface: EventQueryInterface): Params {
-    const params: Params = {};
+    let params: Params = {};
 
     if (queryInterface.page) {
       params['page'] = queryInterface.page;
@@ -50,7 +50,7 @@ export class EventQueryService {
   }
 
   public toQueryInterface(params: Params): EventQueryInterface {
-    const eventQuery: EventQueryInterface = {};
+    let eventQuery: EventQueryInterface = {};
 
     let page = Number(params['page']);
     if (page > 0) {
