@@ -10,7 +10,7 @@
   </div>
   <div class="btn-group">
     <button [routerLink]="'/' + event.id" class="btn btn-sm btn-outline-secondary">Details</button>
-    <button [disabled]="event.type === 'ads' && !eventService.canManageAdsEvents" class="btn btn-sm btn-outline-secondary">Edit</button>
-    <button [disabled]="event.type === 'ads' && !eventService.canManageAdsEvents" class="btn btn-sm btn-outline-danger">Delete</button>
+    <button [disabled]="event.type === 'ads' && !(eventService.canManageAdsEvents | async)" class="btn btn-sm btn-outline-secondary">Edit</button>
+    <button [disabled]="event.type === 'ads' && !(eventService.canManageAdsEvents | async)" class="btn btn-sm btn-outline-danger">Delete</button>
   </div>
 </div>

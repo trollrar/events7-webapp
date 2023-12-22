@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {EventEmitter, Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Page} from "../../shared/interface/page.interface";
@@ -17,10 +17,10 @@ export class EventService {
     this.resetCanManageAdsEvents();
   }
 
-  public canManageAdsEvents: boolean = false;
+  public canManageAdsEvents: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   public resetCanManageAdsEvents() {
-    this.isIpAuthorized().subscribe(isAuthorized => this.canManageAdsEvents = isAuthorized)
+    this.isIpAuthorized().subscribe(isAuthorized => this.canManageAdsEvents.emit(isAuthorized))
   }
 
   public getAll(eventPageQuery: EventQueryInterface): Observable<Page<EventSummary>> {

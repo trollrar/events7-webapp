@@ -1,1 +1,50 @@
-<p>event-create works!</p>
+<div class="card">
+  <div class="card-header">
+    <h6 class="mb-0">Create Event</h6>
+  </div>
+  <div class="card-body">
+    <loading *ngIf="loading"></loading>
+    <form class="p-3"
+          *ngIf="!loading"
+          [formGroup]="form"
+          (submit)="onSubmit()">
+      <div class="form-group">
+        <label for="name"><small>Name</small></label>
+        <input id="name"
+               type="text"
+               class="form-control"
+               placeholder="Name"
+               [formControlName]="'name'">
+      </div>
+      <div class="form-group">
+        <label for="type"><small>Type</small></label>
+        <select id="type"
+                class="form-control"
+                [formControlName]="'type'">
+          <option *ngFor="let type of availableTypes" [value]="type">{{type | titlecase}}</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="priority"><small>Priority</small></label>
+        <select id="priority"
+                class="form-control"
+                [formControlName]="'priority'">
+          <option *ngFor="let priority of priorities" [value]="priority">{{priority}}</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="description"><small>Description</small></label>
+        <textarea id="description"
+                  class="form-control"
+                  placeholder="Event description"
+                  [formControlName]="'description'"></textarea>
+      </div>
+      <div class="alert alert-danger" *ngIf="error">{{ error }}</div>
+      <div class="d-flex justify-content-end mt-3">
+        <button type="submit"
+                class="btn btn-primary">Submit
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
